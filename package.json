@@ -1,0 +1,23 @@
+{
+  "name": "the_ac",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kurtwayne/the_ac.git"
+  },
+  "keywords": [
+    "ad",
+    "checker"
+  ],
+  "author": "KWG",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kurtwayne/the_ac/issues"
+  },
+  "homepage": "https://github.com/kurtwayne/the_ac#readme"
+}
