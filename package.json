@@ -1,0 +1,21 @@
+{
+  "name": "the_ac_web_scraper",
+  "version": "0.0.1",
+  "description": "Scrape ad pages",
+  "main": "server.js",
+  "dependencies" : {
+      "express"  : "latest",
+      "request"  : "latest",
+      "cheerio"  : "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kurtwayne/the_ac.git"
+  },
+  "author": "KWG",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kurtwayne/the_ac/issues"
+  },
+  "homepage": "https://github.com/kurtwayne/the_ac#readme"
+}
