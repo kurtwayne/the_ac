@@ -3,10 +3,11 @@
   "version": "0.0.1",
   "description": "Scrape ad pages",
   "main": "server.js",
-  "dependencies" : {
-      "express"  : "latest",
-      "request"  : "latest",
-      "cheerio"  : "latest"
+  "dependencies": {
+    "cheerio": "latest",
+    "express": "latest",
+    "jsdom": "^11.1.0",
+    "request": "latest"
   },
   "repository": {
     "type": "git",
