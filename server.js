@@ -21,6 +21,7 @@ app.get('/scrape', function(req, res){
 
               // var $ = cheerio.load(html);
               var dom = new jsdom.JSDOM(html, { runScripts: "dangerously" });
+              var feedlink = "http://ads.mediaforge.com"
               console.log(dom.window.mF);
 
           // Finally, we'll define the variables we're going to capture
@@ -28,7 +29,7 @@ app.get('/scrape', function(req, res){
             url: dom.window.mF.config.url,
             feeds: dom.window.mF.config.contents.map(function(x) {
               return {
-                feed: dom.window.mF.config.feeds[x.feed_key],
+                feed: feedlink + dom.window.mF.config.feeds[x.feed_key],
                 feedname: x.feed_key,
                 tracking: x.url
               };
