@@ -2,6 +2,7 @@ var express = require('express');
 var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
+var jsdom = require('jsdom');
 var app     = express();
 
 app.get('/scrape', function(req, res){
@@ -10,7 +11,7 @@ app.get('/scrape', function(req, res){
   url = 'http://ads.mediaforge.com/advertisers/eileen6557/rias/ria3878910/?merchantID=6557&networkID=24';
 
   // The callback function takes 3 parameters, an error, response status code and the html
-
+  console.log(req);
   request(url, function(error, response, html){
 
       // First we'll check to make sure no errors occurred when making the request
@@ -18,35 +19,21 @@ app.get('/scrape', function(req, res){
       if(!error){
               // Next, we'll utilize the cheerio library on the returned html which will essentially give us jQuery functionality
 
-              var $ = cheerio.load(html);
+              // var $ = cheerio.load(html);
+              var dom = new jsdom.JSDOM(html, { runScripts: "dangerously" });
+              console.log(dom.window.mF);
 
           // Finally, we'll define the variables we're going to capture
-
-          var feed, click, partytracking;
-          var json = { click : "", partytracking : "", feed : ""};
-
-          $('script').filter(function(){
-
-           // Store the data we filter into a variable so we can easily see what's going on.
-
-                var data = $(this);
-                var re = /mF = (.+)|parent:/
-                console.log(data.contents().toString().match(re));
-
-           // Utilizing jQuery we navigate and get the text by writing the following code:
-
-                feed = data.children().first().text();
-
-                click = data.children().last().text();
-
-                partytracking = data.children().text();
-
-                // Store it to json objects.
-
-                json.feed = feed;
-                json.click = click;
-                json.partytracking = partytracking;
-          })
+          var json = {
+            url: dom.window.mF.config.url,
+            feeds: dom.window.mF.config.contents.map(function(x) {
+              return {
+                feed: dom.window.mF.config.feeds[x.feed_key],
+                feedname: x.feed_key,
+                tracking: x.url
+              };
+            })
+          };
       }
 
       // To write to the system we will use the built in 'fs' library.
@@ -55,7 +42,7 @@ app.get('/scrape', function(req, res){
       // Parameter 2 :  JSON.stringify(json, null, 4) - the data to write, here we do an extra step by calling JSON.stringify to make our JSON easier to read
       // Parameter 3 :  callback function - a callback function to let us know the status of our function
 
-      fs.writeFile('output.json', JSON.stringify(json, null, 4), function(err){
+       fs.writeFile('output.json', JSON.stringify(json, null, 4), function(err){
 
           console.log('File successfully written! - Check your project directory for the output.json file');
 
