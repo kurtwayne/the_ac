@@ -2,7 +2,7 @@
     "url": "https://ad.doubleclick.net/ddm/clk/401421063;201041094;d",
     "feeds": [
         {
-            "feed": "/products/json/eileen6557/personal",
+            "feed": "http://ads.mediaforge.com/products/json/eileen6557/personal",
             "feedname": "first_tab",
             "tracking": {
                 "prepend": "https://ad.doubleclick.net/ddm/clk/401421063;201041094;d?",
